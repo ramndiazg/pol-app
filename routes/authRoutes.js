@@ -10,36 +10,36 @@ const router = express.Router();
  *   description: Autenticación con Facebook y Google
  */
 
-/**
- * @swagger
- * /api/auth/facebook:
- *   get:
- *     summary: Iniciar sesión con Facebook
- *     tags: [Auth]
- *     responses:
- *       302:
- *         description: Redirige a Facebook para autenticación
- */
+// /**
+//  * @swagger
+//  * /api/auth/facebook:
+//  *   get:
+//  *     summary: Iniciar sesión con Facebook
+//  *     tags: [Auth]
+//  *     responses:
+//  *       302:
+//  *         description: Redirige a Facebook para autenticación
+//  */
 
-/**
- * @swagger
- * /api/auth/facebook/callback:
- *   get:
- *     summary: Callback de Facebook después de la autenticación
- *     tags: [Auth]
- *     responses:
- *       200:
- *         description: Usuario autenticado
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 user:
- *                   $ref: '#/components/schemas/User'
- *                 token:
- *                   type: string
- */
+// /**
+//  * @swagger
+//  * /api/auth/facebook/callback:
+//  *   get:
+//  *     summary: Callback de Facebook después de la autenticación
+//  *     tags: [Auth]
+//  *     responses:
+//  *       200:
+//  *         description: Usuario autenticado
+//  *         content:
+//  *           application/json:
+//  *             schema:
+//  *               type: object
+//  *               properties:
+//  *                 user:
+//  *                   $ref: '#/components/schemas/User'
+//  *                 token:
+//  *                   type: string
+//  */
 
 /**
  * @swagger
@@ -72,16 +72,16 @@ const router = express.Router();
  *                   type: string
  */
 
-router.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }));
+// router.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 
-router.get(
-  '/facebook/callback',
-  passport.authenticate('facebook', { session: false }),
-  (req, res) => {
-    const { user, token } = req.user;
-    res.json({ user, token });
-  }
-);
+// router.get(
+//   '/facebook/callback',
+//   passport.authenticate('facebook', { session: false }),
+//   (req, res) => {
+//     const { user, token } = req.user;
+//     res.json({ user, token });
+//   }
+// );
 
 router.get(
   '/google',
