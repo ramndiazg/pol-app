@@ -11,6 +11,10 @@ const newsSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
+    image: {
+        type: String,
+        trim: true,
+    },
     publicationDate: {
         type: Date,
         default: Date.now,
