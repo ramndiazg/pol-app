@@ -22,16 +22,16 @@ const options = {
     info: {
       title: "Pol-App API",
       version: "1.0.0",
-      description: "API para la aplicación Pol-App",
+      description: "API for the app POL-App",
     },
     servers: [
         {
             url: 'http://localhost:5001',
-            description: 'Servidor local',
+            description: 'Local server',
         },
         {
             url: 'https://vercel.com',
-            description: 'Servidor de producción',
+            description: 'Production server',
         },
     ],
   },
@@ -61,7 +61,7 @@ app.use(limiter);
 app.use(helmet());
 
 const server = app.listen(PORT, () => {
-    console.log(`Servidor corriendo en el puerto ${PORT}`);
+    console.log(`Server running on port: ${PORT}`);
 });
 
 export { app, server };

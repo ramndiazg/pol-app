@@ -3,7 +3,7 @@ import { app, server } from './index.js';
 import mongoose from 'mongoose';
 
 describe('GET /api/news', () => {
-    it('debería obtener todas las noticias', async () => {
+    it('should get all news', async () => {
         const res = await request(app).get('/api/news');
         expect(res.statusCode).toEqual(200);
         expect(res.body).toBeInstanceOf(Array);
@@ -11,7 +11,7 @@ describe('GET /api/news', () => {
 });
 
 describe('POST /api/users/register', () => {
-    it('debería registrar un nuevo usuario', async () => {
+    it('should register a new user', async () => {
         const res = await request(app)
             .post('/api/users/register')
             .send({

@@ -1,26 +1,26 @@
 # Pol App Backend
 
-Este es el backend de la aplicación Pol App, que proporciona autenticación mediante Facebook y Google utilizando OAuth. El backend está alojado en Render y puede accederse a través de la siguiente URL:
+This is the backend for the Pol App, which provides authentication via Facebook and Google using OAuth. The backend is hosted on Render and can be accessed through the following URL:
 
 **URL del Backend:** [https://pol-app.onrender.com](https://pol-app.onrender.com)
 
-## Autenticación
+## Authentication
 
-El backend ofrece dos métodos de autenticación: Facebook y Google. A continuación, se detallan las rutas disponibles y cómo utilizarlas.
+The backend offers two authentication methods: Facebook and Google. Below are the available routes and how to use them.
 
-### Autenticación con Facebook
+### Facebook Authentication
 
-#### Iniciar sesión con Facebook
+#### Login with Facebook
 
-- **Ruta:** `GET /api/auth/facebook`
-- **Descripción:** Redirige al usuario a Facebook para iniciar el proceso de autenticación.
-- **Respuesta:** Redirección a Facebook.
+- **Route:** `GET /api/auth/facebook`
+- **Description:** Redirects the user to Facebook to start the authentication process.
+- **Response:** Redirects to Facebook.
 
-#### Callback de Facebook
+#### Facebook Callback
 
-- **Ruta:** `GET /api/auth/facebook/callback`
-- **Descripción:** Callback que Facebook llama después de que el usuario ha sido autenticado.
-- **Respuesta:** Devuelve un objeto JSON con la información del usuario y un token de autenticación.
+- **Route:** `GET /api/auth/facebook/callback`
+- **Description:** Callback that Facebook calls after the user has been authenticated.
+- **Response:** Returns a JSON object with the user information and an authentication token.
   ```json
   {
     "user": {
@@ -32,19 +32,19 @@ El backend ofrece dos métodos de autenticación: Facebook y Google. A continuac
   }
   ```
 
-### Autenticación con Google
+### Google Authentication
 
-#### Iniciar sesión con Google
+#### Login with Google
 
-- **Ruta:** `GET /api/auth/google`
-- **Descripción:**  Redirige al usuario a Google para iniciar el proceso de autenticación.
-- **Respuesta:** Redirección a Google.
+- **Route:** `GET /api/auth/google`
+- **Description:**  Redirects the user to Google to start the authentication process.
+- **Response:** Redirects to Google.
 
-#### Callback de Google
+#### Google Callback
 
-- **Ruta:**  `GET /api/auth/google/callback`
-- **Descripción:** Callback que Google llama después de que el usuario ha sido autenticado.
-- **Respuesta:** Devuelve un objeto JSON con la información del usuario y un token de autenticación.
+- **Route:**  `GET /api/auth/google/callback`
+- **Description:** Callback that Google calls after the user has been authenticated.
+- **Response:** Returns a JSON object with the user information and an authentication token.
 
 ```json
 {
@@ -57,41 +57,43 @@ El backend ofrece dos métodos de autenticación: Facebook y Google. A continuac
 }
 ```
 
-## Ejemplo de Uso
+## Usage Example
 
-### Autenticación con Facebook
+### Facebook Authentication
 
-#### Iniciar sesión:
-Realiza una solicitud `GET a https://pol-app.onrender.com/api/auth/facebook.`
-El usuario será redirigido a Facebook para autenticarse.
-Callback:
-Después de la autenticación, Facebook redirigirá al usuario a `https://pol-app.onrender.com/api/auth/facebook/callback.`
-El backend devolverá un JSON con la información del usuario y el token.
+#### Login:
+Make a Get request to `https://pol-app.onrender.com/api/auth/facebook.`
+The user will be redirected to Facebook for authentication.
+#### Callback:
+After authentication, Facebook will redirect the user to `https://pol-app.onrender.com/api/auth/facebook/callback.`
+The backend will return a JSON object with the user information and token.
 
-### Autenticación con Google
+### Google Authentication
 
-#### Iniciar sesión:
-Realiza una solicitud `GET a https://pol-app.onrender.com/api/auth/google.`
-El usuario será redirigido a Google para autenticarse.
-Callback:
-Después de la autenticación, Google redirigirá al usuario a `https://pol-app.onrender.com/api/auth/google/callback.`
-El backend devolverá un JSON con la información del usuario y el token.
+#### Login:
+Make a Get request to `https://pol-app.onrender.com/api/auth/google.`
+The user will be redirected to Google for authentication.
+#### Callback:
+After authentication, Google will redirect the user to `https://pol-app.onrender.com/api/auth/google/callback.`
+The backend will return a JSON object with the user information and token.
 
-## Tecnologías Utilizadas
+## Technologies Used
 
-Express.js: Framework de Node.js para construir la API.
-Passport.js: Middleware de autenticación para Node.js.
-OAuth: Protocolo de autorización utilizado para la autenticación con Facebook y Google.
-Render: Plataforma de hosting donde está desplegado el backend.
-Contribución
+Express.js: Node.js framework for building the API.
+Passport.js: Authentication middleware for Node.js.
+OAuth: Authorization protocol used for authentication with Facebook and Google.
+Render: Hosting platform where the backend is deployed.
 
-Si deseas contribuir a este proyecto, por favor sigue los siguientes pasos:
+## Contribución
 
-Haz un fork del repositorio.
-Crea una nueva rama (git checkout -b feature/nueva-funcionalidad).
-Realiza tus cambios y haz commit (git commit -am 'Añade nueva funcionalidad').
-Haz push a la rama (git push origin feature/nueva-funcionalidad).
-Abre un Pull Request.
-Licencia
+If you wish to contribute to this project, please follow these steps:
 
-Este proyecto está bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.
+Fork the repository.
+Create a new branch (git checkout -b feature/new-feature).
+Make your changes and commit them (git commit -am 'Add new feature').
+Push to the branch (git push origin feature/new-feature).
+Open a Pull Request.
+
+## License
+
+This project is under a license under construction.

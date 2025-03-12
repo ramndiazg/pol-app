@@ -7,17 +7,17 @@ export const registerUser = async (req, res) => {
     try {
         const userExistsByEmail = await User.findOne({ email });
         if (userExistsByEmail) {
-            return res.status(400).json({ message: 'El email ya está registrado' });
+            return res.status(400).json({ message: 'Email is already registered' });
         }
 
         const userExistsByPhone = await User.findOne({ phone });
         if (userExistsByPhone) {
-            return res.status(400).json({ message: 'El teléfono ya está registrado' });
+            return res.status(400).json({ message: 'Phone number is already registered' });
         }
 
         const userExistsByIdNumber = await User.findOne({ idNumber });
         if (userExistsByIdNumber) {
-            return res.status(400).json({ message: 'El id ya está registrado' });
+            return res.status(400).json({ message: 'ID number is already registered' });
         }
 
         const user = await User.create({
@@ -41,7 +41,7 @@ export const registerUser = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: 'Error al registrar el usuario' });
+        res.status(500).json({ message: 'Error registering user' });
     }
 };
 
@@ -58,10 +58,10 @@ export const loginUser = async (req, res) => {
                 token: generateToken(user._id),
             });
         } else {
-            res.status(401).json({ message: 'Credenciales inválidas' });
+            res.status(401).json({ message: 'Invalid credentials' });
         }
     } catch (error) {
-        res.status(500).json({ message: 'Error al iniciar sesión' });
+        res.status(500).json({ message: 'Error logging in' });
     }
 };
 
@@ -70,6 +70,6 @@ export const getUserReferrals = async (req, res) => {
         const user = await User.findById(req.user._id).populate('referrals');
         res.json(user.referrals);
     } catch (error) {
-        res.status(500).json({ message: 'Error al obtener referidos' });
+        res.status(500).json({ message: 'Error fetching referrals' });
     }
 };

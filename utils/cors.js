@@ -11,7 +11,7 @@ const corsOptions = {
         if (allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
-            callback(new Error('Dominio no permitido por CORS'));
+            callback(new Error('Domain not allowed by CORS'));
         }
     },
     credentials: true,

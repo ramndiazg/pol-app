@@ -7,7 +7,7 @@ export const registerAdmin = async (req, res) => {
     try {
         const adminExists = await Admin.findOne({ email });
         if (adminExists) {
-            return res.status(400).json({ message: 'El administrador ya existe' });
+            return res.status(400).json({ message: 'Admin already exists' });
         }
 
         const admin = await Admin.create({
@@ -23,7 +23,7 @@ export const registerAdmin = async (req, res) => {
             token: generateToken(admin._id),
         });
     } catch (error) {
-        res.status(500).json({ message: 'Error al registrar el administrador' });
+        res.status(500).json({ message: 'Error registering admin' });
     }
 };
 
@@ -40,9 +40,9 @@ export const loginAdmin = async (req, res) => {
                 token: generateToken(admin._id),
             });
         } else {
-            res.status(401).json({ message: 'Credenciales inválidas' });
+            res.status(401).json({ message: 'Invalid credentials' });
         }
     } catch (error) {
-        res.status(500).json({ message: 'Error al iniciar sesión' });
+        res.status(500).json({ message: 'Error logging in' });
     }
 };

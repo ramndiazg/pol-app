@@ -6,7 +6,7 @@ const authMiddleware = async (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');
 
     if (!token) {
-        return res.status(401).json({ message: 'No autorizado' });
+        return res.status(401).json({ message: 'Not autorized' });
     }
 
     try {
@@ -15,14 +15,14 @@ const authMiddleware = async (req, res, next) => {
         const admin = await Admin.findById(decoded.id);
 
         if (!user && !admin) {
-            return res.status(401).json({ message: 'No autorizado' });
+            return res.status(401).json({ message: 'Not autorized' });
         }
 
         req.user = user || admin;
         req.role = user ? 'user' : 'admin';
         next();
     } catch (error) {
-        res.status(401).json({ message: 'Token inválido' });
+        res.status(401).json({ message: 'Invalid Token' });
     }
 };
 
