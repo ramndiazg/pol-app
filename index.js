@@ -13,6 +13,7 @@ import swaggerUi from "swagger-ui-express";
 
 const app = express();
 const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
+const PORT = process.env.PORT || 5001;
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -53,6 +54,8 @@ app.use(cors(corsOptions));
 app.use(limiter);
 app.use(helmet());
 
-app.listen(process.env.PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${process.env.PORT}`);
+const server = app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
+
+export { app, server };
