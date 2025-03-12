@@ -1,178 +1,97 @@
-Pol-App Backend
-Este es el backend de la aplicación Pol-App, una plataforma política que permite a los usuarios registrarse, referir a otros usuarios, ver noticias y darles like. El backend está construido con Node.js, Express, MongoDB y desplegado en Render.
+# Pol App Backend
 
-Tabla de Contenidos
+Este es el backend de la aplicación Pol App, que proporciona autenticación mediante Facebook y Google utilizando OAuth. El backend está alojado en Render y puede accederse a través de la siguiente URL:
 
-Instalación
-Configuración
-Uso
-Rutas de la API
-Documentación de la API
-Despliegue
-Contribución
-Licencia
-Instalación
+**URL del Backend:** [https://pol-app.onrender.com](https://pol-app.onrender.com)
 
-Sigue estos pasos para instalar y ejecutar el proyecto localmente.
+## Autenticación
 
-Clona el repositorio:
-bash
-Copy
-git clone https://github.com/tu-usuario/pol-app.git
-cd pol-app
-Instala las dependencias:
-bash
-Copy
-npm install
-Crea un archivo .env en la raíz del proyecto y agrega las siguientes variables de entorno:
-env
-Copy
-PORT=5001
-DB_STRING=mongodb+srv://usuario:contraseña@cluster0.mongodb.net/pol-app?retryWrites=true&w=majority
-JWT_SECRET=clave_super_secreta
-Inicia el servidor:
-bash
-Copy
-npm start
-Ejecuta las pruebas:
-bash
-Copy
-npm test
-Configuración
+El backend ofrece dos métodos de autenticación: Facebook y Google. A continuación, se detallan las rutas disponibles y cómo utilizarlas.
 
-Variables de Entorno
+### Autenticación con Facebook
 
-Variable	Descripción	Valor por Defecto
-PORT	Puerto en el que corre el servidor	5001
-DB_STRING	Cadena de conexión a MongoDB	-
-JWT_SECRET	Clave secreta para firmar tokens JWT	-
-Uso
+#### Iniciar sesión con Facebook
 
-Ejecutar en Local
+- **Ruta:** `GET /api/auth/facebook`
+- **Descripción:** Redirige al usuario a Facebook para iniciar el proceso de autenticación.
+- **Respuesta:** Redirección a Facebook.
 
-Inicia el servidor:
-bash
-Copy
-npm start
-Accede a la API en:
-Copy
-http://localhost:5001
-Prueba las rutas usando Postman o cualquier cliente HTTP.
-Despliegue en Render
+#### Callback de Facebook
 
-El backend está desplegado en Render. Puedes acceder a la API en:
+- **Ruta:** `GET /api/auth/facebook/callback`
+- **Descripción:** Callback que Facebook llama después de que el usuario ha sido autenticado.
+- **Respuesta:** Devuelve un objeto JSON con la información del usuario y un token de autenticación.
+  ```json
+  {
+    "user": {
+      "id": "12345",
+      "name": "John Doe",
+      "email": "john.doe@example.com"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }
+  ```
 
-Copy
-https://pol-app.onrender.com
-Rutas de la API
+### Autenticación con Google
 
-Usuarios
+#### Iniciar sesión con Google
 
-Método	Ruta	Descripción
-POST	/api/users/register	Registrar un nuevo usuario
-POST	/api/users/login	Iniciar sesión como usuario
-GET	/api/users/referrals	Obtener usuarios referidos
-Noticias
+- **Ruta:** `GET /api/auth/google`
+- **Descripción:**  Redirige al usuario a Google para iniciar el proceso de autenticación.
+- **Respuesta:** Redirección a Google.
 
-Método	Ruta	Descripción
-POST	/api/news	Crear una nueva noticia (Admin)
-GET	/api/news	Obtener todas las noticias
-POST	/api/news/:id/like	Dar like a una noticia (Usuario)
-Administradores
+#### Callback de Google
 
-Método	Ruta	Descripción
-POST	/api/admin/register	Registrar un nuevo administrador
-POST	/api/admin/login	Iniciar sesión como administrador
-Documentación de la API
+- **Ruta:**  `GET /api/auth/google/callback`
+- **Descripción:** Callback que Google llama después de que el usuario ha sido autenticado.
+- **Respuesta:** Devuelve un objeto JSON con la información del usuario y un token de autenticación.
 
-La documentación de la API está disponible usando Swagger. Puedes acceder a ella en:
+```json
+{
+  "user": {
+    "id": "67890",
+    "name": "Jane Doe",
+    "email": "jane.doe@example.com"
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
 
-Local:
-Copy
-http://localhost:5001/api-docs
-Producción:
-Copy
-https://pol-app.onrender.com/api-docs
-En Swagger UI, puedes explorar todas las rutas, probarlas y ver ejemplos de solicitudes y respuestas.
+## Ejemplo de Uso
 
-Despliegue
+### Autenticación con Facebook
 
-El backend está desplegado en Render. Para desplegar tu propia instancia:
+#### Iniciar sesión:
+Realiza una solicitud `GET a https://pol-app.onrender.com/api/auth/facebook.`
+El usuario será redirigido a Facebook para autenticarse.
+Callback:
+Después de la autenticación, Facebook redirigirá al usuario a `https://pol-app.onrender.com/api/auth/facebook/callback.`
+El backend devolverá un JSON con la información del usuario y el token.
 
-Crea una cuenta en Render.
-Conecta tu repositorio de GitHub.
-Configura las variables de entorno en el panel de Render.
-Despliega el servicio.
+### Autenticación con Google
+
+#### Iniciar sesión:
+Realiza una solicitud `GET a https://pol-app.onrender.com/api/auth/google.`
+El usuario será redirigido a Google para autenticarse.
+Callback:
+Después de la autenticación, Google redirigirá al usuario a `https://pol-app.onrender.com/api/auth/google/callback.`
+El backend devolverá un JSON con la información del usuario y el token.
+
+## Tecnologías Utilizadas
+
+Express.js: Framework de Node.js para construir la API.
+Passport.js: Middleware de autenticación para Node.js.
+OAuth: Protocolo de autorización utilizado para la autenticación con Facebook y Google.
+Render: Plataforma de hosting donde está desplegado el backend.
 Contribución
 
-Si deseas contribuir a este proyecto, sigue estos pasos:
+Si deseas contribuir a este proyecto, por favor sigue los siguientes pasos:
 
 Haz un fork del repositorio.
-Crea una nueva rama:
-bash
-Copy
-git checkout -b feature/nueva-funcionalidad
-Realiza tus cambios y haz commit:
-bash
-Copy
-git commit -m "Agrega nueva funcionalidad"
-Envía un pull request.
+Crea una nueva rama (git checkout -b feature/nueva-funcionalidad).
+Realiza tus cambios y haz commit (git commit -am 'Añade nueva funcionalidad').
+Haz push a la rama (git push origin feature/nueva-funcionalidad).
+Abre un Pull Request.
 Licencia
 
 Este proyecto está bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.
-
-Ejemplos de Uso
-
-Registrar un Usuario
-
-URL: POST /api/users/register
-
-Body:
-
-json
-Copy
-{
-  "name": "John Doe",
-  "email": "john.doe@example.com",
-  "password": "password123",
-  "phone": "1234567890",
-  "idNumber": "123456789"
-}
-Respuesta:
-
-json
-Copy
-{
-  "_id": "64f1a2b3c4d5e6f7a8b9c0d1",
-  "name": "John Doe",
-  "email": "john.doe@example.com",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-}
-Obtener Noticias
-
-URL: GET /api/news
-
-Respuesta:
-
-json
-Copy
-[
-  {
-    "_id": "64f1a2b3c4d5e6f7a8b9c0d3",
-    "title": "Nueva Noticia",
-    "content": "Este es el contenido de la noticia.",
-    "image": "https://example.com/image.jpg",
-    "publicationDate": "2023-09-01T12:00:00.000Z",
-    "likes": [],
-    "admin": {
-      "_id": "64f1a2b3c4d5e6f7a8b9c0d2",
-      "name": "Admin User"
-    }
-  }
-]
-
-Mongo Atlas DB
-ramndiaz
-9D1xPZTXskjT0U0k
-mongodb+srv://ramndiaz:9D1xPZTXskjT0U0k@cluster0.bmxgv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-npm start
