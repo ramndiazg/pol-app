@@ -4,6 +4,8 @@ import connectToDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import newsRoutes from "./routes/newsRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import authRoutes from './routes/authRoutes.js'; // Importa las rutas de autenticación
+import passport from './config/passport.js'; // Importa Passport
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import cors from "cors";
@@ -37,6 +39,7 @@ const options = {
     "./routes/adminRoutes.js",
     "./routes/newsRoutes.js",
     "./routes/userRoutes.js",
+    './routes/authRoutes.js',
   ],
 };
 const specs = swaggerJsdoc(options);
@@ -45,10 +48,13 @@ connectToDB();
 
 app.use(express.json());
 
+app.use(passport.initialize());
+
 // Rutas
 app.use("/api/users", userRoutes);
 app.use("/api/news", newsRoutes);
 app.use("/api/admin", adminRoutes);
+app.use('/api/auth', authRoutes);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 app.use(cors(corsOptions));
 app.use(limiter);
